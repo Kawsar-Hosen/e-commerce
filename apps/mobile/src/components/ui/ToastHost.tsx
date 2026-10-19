@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { CircleAlert, CircleCheckBig, Info, TriangleAlert, X } from 'lucide-react-native';
-import { resolveAppHrefString } from '../../lib/links';
+import { resolveAppHrefTarget } from '../../lib/links';
 import { useReduceMotion } from '../../hooks/useReduceMotion';
 import { useTheme } from '../../hooks/useTheme';
 import { useUiStore, type ToastMessage } from '../../store/ui.store';
@@ -93,7 +93,7 @@ function ToastCard({ toast }: { toast: ToastMessage }) {
           <Pressable
             onPress={() => {
               dismissToast(toast.id);
-              router.push(resolveAppHrefString(toast.actionHref ?? '/(tabs)'));
+              router.push(resolveAppHrefTarget(toast.actionHref ?? '/(tabs)'));
             }}
             accessibilityRole="button"
             accessibilityLabel={toast.actionLabel}

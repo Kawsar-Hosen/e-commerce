@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { FlatList, View, useWindowDimensions } from 'react-native';
 import { useRouter } from 'expo-router';
 import type { Product } from '@shobdox/shared-types';
-import { resolveAppHref } from '../../lib/links';
+import { resolveAppHrefTarget } from '../../lib/links';
 import { formatBanglaCount } from '@shobdox/shared-utils';
 import { useTheme } from '../../hooks/useTheme';
 import { ProductCard, SectionHeader } from '../ui';
@@ -50,8 +50,7 @@ export function ProductRail({
       return;
     }
     if (!href) return;
-    const { pathname, params } = resolveAppHref(href);
-    router.push({ pathname, params });
+    router.push(resolveAppHrefTarget(href));
   }, [href, onSeeAll, router]);
 
   const renderItem = useCallback(

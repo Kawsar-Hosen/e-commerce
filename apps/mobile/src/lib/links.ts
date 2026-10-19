@@ -6,6 +6,8 @@
  * fixture data goes through `resolveAppHref()` instead of guessing in a screen.
  */
 
+import type { Href } from 'expo-router';
+
 export interface ResolvedHref {
   pathname: string;
   params: Record<string, string>;
@@ -73,4 +75,17 @@ export function resolveAppHrefString(href: string): string {
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
   return query ? `${pathname}?${query}` : pathname;
+}
+
+/**
+ * `router.push()` argument for a fixture href.
+ *
+ * Fixture links are data, so their target cannot be known at compile time. The
+ * mapping in `resolveAppHref()` above is the contract that guarantees the route
+ * exists; this cast is the single boundary between that data and Expo Router's
+ * generated `Href` union.
+ */
+export function resolveAppHrefTarget(href: string): Href {
+  const { pathname, params } = resolveAppHref(href);
+  return { pathname, params } as Href;
 }

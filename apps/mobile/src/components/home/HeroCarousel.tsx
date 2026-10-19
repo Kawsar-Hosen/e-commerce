@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import type { Banner } from '@shobdox/shared-types';
-import { resolveAppHref } from '../../lib/links';
+import { resolveAppHrefTarget } from '../../lib/links';
 import { useTheme } from '../../hooks/useTheme';
 import { useReduceMotion } from '../../hooks/useReduceMotion';
 import { AppImage, Button, Text } from '../ui';
@@ -122,8 +122,7 @@ export function HeroCarousel({ banners }: HeroCarouselProps) {
                 label={banner.ctaLabel}
                 variant={banner.theme === 'soft' ? 'primary' : 'secondary'}
                 onPress={() => {
-                  const { pathname, params } = resolveAppHref(banner.href);
-                  router.push({ pathname, params });
+                  router.push(resolveAppHrefTarget(banner.href));
                 }}
                 accessibilityLabel={`${banner.ctaLabel} — ${banner.title}`}
               />

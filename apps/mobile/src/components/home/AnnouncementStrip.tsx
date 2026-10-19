@@ -2,7 +2,7 @@ import { Pressable, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Megaphone } from 'lucide-react-native';
 import type { Announcement } from '@shobdox/shared-types';
-import { resolveAppHref } from '../../lib/links';
+import { resolveAppHrefTarget } from '../../lib/links';
 import { useTheme } from '../../hooks/useTheme';
 import { Text } from '../ui';
 
@@ -40,8 +40,7 @@ export function AnnouncementStrip({ announcements }: AnnouncementStripProps) {
 
   const open = () => {
     if (!announcement.href) return;
-    const { pathname, params } = resolveAppHref(announcement.href);
-    router.push({ pathname, params });
+    router.push(resolveAppHrefTarget(announcement.href));
   };
 
   return (
