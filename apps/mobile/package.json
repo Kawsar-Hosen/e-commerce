@@ -1,0 +1,51 @@
+{
+  "name": "@shobdox/mobile",
+  "version": "0.1.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "description": "SHOBDOX native Android shopping app (Expo + React Native).",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "expo-go": "expo start --go",
+    "doctor": "npx expo-doctor",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@shobdox/design-tokens": "workspace:*",
+    "@shobdox/shared-business-logic": "workspace:*",
+    "@shobdox/shared-mock-data": "workspace:*",
+    "@shobdox/shared-types": "workspace:*",
+    "@shobdox/shared-utils": "workspace:*",
+    "@shobdox/shared-validation": "workspace:*",
+    "expo": "~58.0.14",
+    "expo-constants": "~58.0.12",
+    "expo-font": "~58.0.8",
+    "expo-image": "~58.0.15",
+    "expo-linking": "~58.0.13",
+    "expo-router": "~58.0.23",
+    "expo-splash-screen": "~58.0.10",
+    "expo-status-bar": "~58.0.3",
+    "expo-system-ui": "~58.0.6",
+    "lucide-react-native": "~1.59.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-hook-form": "~7.90.0",
+    "react-native": "0.88.0",
+    "react-native-gesture-handler": "~3.3.0",
+    "react-native-reanimated": "4.7.1",
+    "react-native-safe-area-context": "~5.10.1",
+    "react-native-screens": "~4.30.0",
+    "react-native-web": "~0.21.4",
+    "react-native-worklets": "0.13.0",
+    "zod": "~4.6.7",
+    "zustand": "~5.0.15",
+    "@hookform/resolvers": "~5.9.2",
+    "react-native-svg": "15.16.0",
+    "@react-native-async-storage/async-storage": "2.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "~19.3.0",
+    "typescript": "6.0.3"
+  }
+}

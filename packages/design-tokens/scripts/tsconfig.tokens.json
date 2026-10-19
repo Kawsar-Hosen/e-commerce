@@ -1,0 +1,15 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "../.generated",
+    "rootDir": "../src",
+    "declaration": false,
+    "sourceMap": false,
+    "verbatimModuleSyntax": false,
+    "isolatedModules": false,
+    "noUnusedLocals": false,
+    "types": []
+  },
+  "include": ["../src/tokens.ts"]
+}

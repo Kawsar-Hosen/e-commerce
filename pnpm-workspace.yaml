@@ -1,0 +1,22 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+# A flat, npm-compatible node_modules.
+#
+# Metro (React Native) walks `node_modules` with its own file map and cannot
+# follow the per-package symlinks of the isolated linker, which makes
+# `expo export` / `expo start` fail to resolve the app entry. pnpm 12 reads
+# settings from this file rather than from `.npmrc`, so the linker is set here.
+nodeLinker: hoisted
+
+# pnpm 10+ blocks lifecycle scripts unless they are approved. These three ship
+# native binaries that must be linked into place for Vite/Tailwind/Metro.
+minimumReleaseAgeExclude:
+  - '@tanstack/query-core@5.104.4'
+  - '@tanstack/react-query@5.104.4'
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - '@tailwindcss/oxide'

@@ -1,0 +1,298 @@
+/*
+ * Global stylesheet for the SHOBDOX website.
+ *
+ * Layer order:
+ *   1. Tailwind CSS v4 core
+ *   2. generated design tokens (`@theme`, shared with the Android app)
+ *   3. base element styles and small cross-cutting utilities
+ *
+ * No component styles live here — components own their Tailwind classes so that
+ * React Native can mirror them from the same token values.
+ */
+
+@import 'tailwindcss';
+@import './tokens.generated.css';
+
+/* --------------------------------------------------------------- keyframes */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -180% 0;
+  }
+  to {
+    background-position: 180% 0;
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------------------------------------------------------------------- layers */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Anchor jumps must clear the sticky header. */
+    scroll-padding-top: calc(var(--shobdox-header-height) + 16px);
+  }
+
+  body {
+    /*
+     * Bangla first: Hind Siliguri also covers Latin glyphs, so mixed
+     * Bangla/English copy keeps a consistent rhythm. `font-sans` is applied to
+     * Latin-only surfaces such as prices and SKUs.
+     */
+    font-family: var(--font-bangla);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-size: var(--text-base);
+    line-height: var(--leading-snug);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Long Bangla strings must wrap, never overflow. */
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  body[data-scroll-locked='true'] {
+    overflow: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-snug);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  /* Pointer users should not see focus rings on click, only keyboard users. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--color-green-100);
+    color: var(--color-primary-dark);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* Numeric surfaces (prices, order numbers, dashboards). */
+  .font-num {
+    font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+}
+
+/* --------------------------------------------------------------- utilities */
+
+@layer utilities {
+  /* Page shell: one place to control the responsive gutter. */
+  .page-shell {
+    width: 100%;
+    margin-inline: auto;
+    max-width: var(--shobdox-container, 1440px);
+    padding-inline: var(--shobdox-gutter);
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Horizontal rails: snap scrolling on touch, hidden scrollbar on desktop. */
+  .rail {
+    display: flex;
+    gap: var(--spacing-3);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rail > * {
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+  }
+
+  .safe-bottom {
+    padding-bottom: max(0px, var(--shobdox-safe-bottom));
+  }
+
+  .safe-top {
+    padding-top: var(--shobdox-safe-top);
+  }
+
+  /* Space reserved at the bottom of mobile screens for the bottom tab bar. */
+  .with-bottom-nav {
+    padding-bottom: calc(var(--shobdox-bottom-nav-height) + var(--shobdox-safe-bottom) + 8px);
+  }
+
+  .line-clamp-1,
+  .line-clamp-2,
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-1 {
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    -webkit-line-clamp: 3;
+  }
+
+  .skeleton {
+    background-image: linear-gradient(
+      90deg,
+      var(--color-skeleton) 0%,
+      var(--color-skeleton-highlight) 50%,
+      var(--color-skeleton) 100%
+    );
+    background-size: 220% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+
+  /* Frosted sticky surfaces (header, bottom bar). */
+  .glass {
+    background-color: color-mix(in srgb, var(--color-surface) 88%, transparent);
+    backdrop-filter: saturate(140%) blur(12px);
+  }
+
+  .tap-target {
+    min-height: var(--shobdox-min-touch-target);
+    min-width: var(--shobdox-min-touch-target);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ---------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .skeleton {
+    animation: none;
+    background: var(--color-skeleton);
+  }
+}
+
+/* --------------------------------------------------------------- print view */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

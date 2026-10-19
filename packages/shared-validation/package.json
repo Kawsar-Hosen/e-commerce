@@ -1,0 +1,21 @@
+{
+  "name": "@shobdox/shared-validation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Zod schemas shared by web forms and React Native forms.",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@shobdox/shared-types": "workspace:*",
+    "zod": "~4.6.7",
+    "@shobdox/shared-utils": "workspace:*"
+  },
+  "files": [
+    "src"
+  ]
+}

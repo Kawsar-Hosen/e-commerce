@@ -1,0 +1,19 @@
+{
+  "name": "@shobdox/shared-utils",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pure, platform-agnostic helpers: BDT currency, Bangla numerals, dates, slugs, geo data.",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@shobdox/shared-types": "workspace:*"
+  },
+  "files": [
+    "src"
+  ]
+}

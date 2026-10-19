@@ -1,0 +1,42 @@
+{
+  "name": "SHOBDOX",
+  "slug": "shobdox",
+  "version": "0.1.0",
+  "scheme": "shobdox",
+  "orientation": "portrait",
+  "userInterfaceStyle": "automatic",
+  "newArchEnabled": true,
+  "icon": "./assets/icon.png",
+  "primaryColor": "#166534",
+  "backgroundColor": "#F8FAFC",
+  "jsEngine": "hermes",
+  "splash": {
+    "image": "./assets/splash.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#F8FAFC"
+  },
+  "assetBundlePatterns": [
+    "assets/**/*"
+  ],
+  "android": {
+    "package": "com.shobdox.app",
+    "versionCode": 1,
+    "edgeToEdgeEnabled": true,
+    "backgroundColor": "#F8FAFC",
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png",
+      "backgroundColor": "#166534"
+    },
+    "permissions": []
+  },
+  "web": {
+    "favicon": "./assets/favicon.png"
+  },
+  "plugins": [
+    "expo-router",
+    "expo-font"
+  ],
+  "experiments": {
+    "typedRoutes": true
+  }
+}
